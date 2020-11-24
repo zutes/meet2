@@ -2,7 +2,7 @@
   "name": "meet2",
   "version": "0.1.0",
   "private": true,
-"homepage": "https://zutes.github.io/meet2",
+  "homepage": "https://zutes.github.io/meet2",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
@@ -17,8 +17,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-"predeploy": "npm run build",
-"deploy": "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -39,6 +39,8 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "gh-pages": "^3.1.0"
   }
 }
