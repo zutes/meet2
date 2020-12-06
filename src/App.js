@@ -1,19 +1,54 @@
 import React, { Component } from 'react';
 import './App.css';
+import './nprogress.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
-import Event from './Event';
 import NumberOfEvents from './NumberOfEvents';
+import Event from './Event';
+import { extractLocations, getEvents } from './api';
 
 
 class App extends Component {
+  state = {
+    events: [],
+    locations: []
+  };
+
+  updateEvents = (location) => {
+    getEvents().then((events) => {
+      const locationEvents = (location === 'all') ?
+        events :
+        events.filter((event) => event.location === location);
+      this.setState({
+        events: locationEvents
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.mounted = true;
+    getEvents().then((events) => {
+      if (this.mounted) {
+        this.setState({
+          events: events,
+          locations: extractLocations(events),
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   render() {
     return (
       <div className="App">
-        <CitySearch />
-        <EventList />
-        <Event />
+        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
+        <EventList events={this.state.events} />
+        
         <NumberOfEvents />
+        
       </div>
     );
   }
