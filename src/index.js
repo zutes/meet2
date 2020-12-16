@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-//import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker';
 import * as atatus from 'atatus-spa';
 
 ReactDOM.render(
@@ -19,5 +19,7 @@ ReactDOM.render(
 reportWebVitals();
 
 //serviceWorker.unregister();
+serviceWorker.register();
+
 atatus.config('921252d3764d411a9b1aeb81d92f7845').install();
 
