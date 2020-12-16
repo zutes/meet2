@@ -5,6 +5,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { extractLocations, getEvents } from './api';
+import { WarningAlert} from './Alert';
 
 
 class App extends Component {
@@ -54,7 +55,19 @@ class App extends Component {
         });
       }
     });
+    window.addEventListener("online", this.WarningAlert());
   }
+
+  WarningAlert = () => {
+    if (navigator.onLine === false) {
+      this.setState({
+        alertText:
+          "You are not connected to the internet. To receive updated events, please connect online",
+      });
+    } else {
+      this.setState({ alertText: "" });
+    }
+  };
 
   componentWillUnmount() {
     this.mounted = false;
@@ -63,6 +76,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>Z's Meet App</h1>
+        <h3>Enter a City</h3>
+        <WarningAlert text={this.state.alertText} />
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <EventList events={this.state.events} />
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents}
