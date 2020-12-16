@@ -21,6 +21,15 @@ const checkToken = async (accessToken) => {
 export const getEvents = async () => {
   NProgress.start();
 
+  if (
+    !navigator.onLine &&
+    !window.location.href.startsWith("http://localhost")
+  ) {
+    const events = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return JSON.parse(events).events;
+  }
+
   if (window.location.href.startsWith("http://localhost")) {
     NProgress.done();
     return mockData;
@@ -30,10 +39,10 @@ export const getEvents = async () => {
 
   if (token) {
     removeQuery();
-    const url = `https://7fjff7sh6e.execute-api.us-east-2.amazonaws.com/dev/api/get-events/${token}`;
+    const url = `https://zc2uat1685.execute-api.us-east-1.amazonaws.com/dev/api/get-events/${token}`;
     const result = await axios.get(url);
     if (result.data) {
-      var locations = extractLocations(result.data.events);
+      let locations = extractLocations(result.data.events);
       localStorage.setItem("lastEvents", JSON.stringify(result.data));
       localStorage.setItem("locations", JSON.stringify(locations));
     }
