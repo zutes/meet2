@@ -63,7 +63,7 @@ class App extends Component {
     if (navigator.onLine === false) {
       this.setState({
         alertText:
-          "You are offline. For updated events, connect Z's Meet App to the internet.",
+          "You are offline. For updated events, connect Z\'s Meet App to the internet.",
       });
     } else {
       this.setState({ alertText: "" });
