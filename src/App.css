@@ -121,6 +121,11 @@ input[type='number'] {
   text-align: center;
 }
 
+.number-of-events-label {
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .button-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
